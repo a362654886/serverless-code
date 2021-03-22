@@ -11,7 +11,7 @@
 
 
 Local test run
- 
-  "serverless offline"
+
+   serverless offline
   
   
