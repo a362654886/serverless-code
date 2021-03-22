@@ -2,29 +2,25 @@
  a project aim to study serverless , aws, graphql and dynamoDB.
  This project already deploied. You can check this website.
  
+ **URL:**
+ 
+All functions are deployed on the aws server in the form of serverless
+ 
  https://lei-swagger-bucket.s3.amazonaws.com/index.html
 
 
 
-**RUN:**
+**Local Test:**
 
-Client-side：
-
-       Run:    run "npm run start" in "./client-side" folder.
-
-       Test:   run "npm run test"  in "./client-side" folder.          
-
-Serve-side:
-
-       Run:    run "npm run serve"  in  "./server" folder.
-
-       Test:   run "npm run test"   in "./client-side" folder.
+       Run:    serverless offline   
 
 
 **LOGIN test email**
 
       email: test@outlook.com 
       password: 111222
+
+      then copy token in 'authorization' and then you can test all api
 
 **Main page**
 
