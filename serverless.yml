@@ -1,0 +1,325 @@
+service: aws-serverless-code
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  apiGateway:
+    shouldStartNameWithService: true
+
+functions:
+  authorizationFunc:
+    handler: dist/src/handler/AuthorizationHandler.authorizationFunc
+  userAuth:
+    handler: dist/src/handler/UserHandler.userAuth
+    events:
+      - http:
+          path: userAuth
+          method: post
+          cors: true
+  userRoleQuery:
+    handler: dist/src/handler/UserHandler.userRoleQuery
+    events:
+      - http:
+          path: userRoleQuery
+          method: get
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  userNameQuery:
+    handler: dist/src/handler/UserHandler.userNameQuery
+    events:
+      - http:
+          path: userNameQuery
+          method: get
+          cors: true     
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0   
+  userInsert:
+    handler: dist/src/handler/UserHandler.userInsert
+    events:
+      - http:
+          path: userInsert
+          method: post
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  userUpdate:
+    handler: dist/src/handler/UserHandler.userUpdate
+    events:
+      - http:
+          path: userUpdate
+          method: put
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  userDelete:
+    handler: dist/src/handler/UserHandler.userDelete
+    events:
+      - http:
+          path: userDelete
+          method: delete
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  courseQuery:
+    handler: dist/src/handler/CourseHandler.courseGet
+    events:
+      - http:
+          path: courseGet
+          method: get
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  courseGet:
+    handler: dist/src/handler/CourseHandler.courseGetOne
+    events:
+      - http:
+          path: courseGetOne
+          method: get
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  courseInsert:
+    handler: dist/src/handler/CourseHandler.courseInsert
+    events:
+      - http:
+          path: courseInsert
+          method: post
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  courseUpdate:
+    handler: dist/src/handler/CourseHandler.courseUpdate
+    events:
+      - http:
+          path: courseUpdate
+          method: put
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  courseDelete:
+    handler: dist/src/handler/CourseHandler.courseDelete
+    events:
+      - http:
+          path: courseDelete
+          method: delete
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  classInsert:
+    handler: dist/src/handler/ClassHandler.classInsert
+    events:
+      - http:
+          path: classInsert
+          method: post
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  classDelete:
+    handler: dist/src/handler/ClassHandler.classDelete
+    events:
+      - http:
+          path: classDelete
+          method: delete
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  studentQuery:
+    handler: dist/src/handler/StudentHandler.studentQuery
+    events:
+      - http:
+          path: studentQuery
+          method: get
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  studentDelete:
+    handler: dist/src/handler/StudentHandler.studentDelete
+    events:
+      - http:
+          path: deleteStudent
+          method: delete
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  studentUpdate:
+    handler: dist/src/handler/StudentHandler.studentUpdate
+    events:
+      - http:
+          path: updateStudent
+          method: put
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  studentInsert:
+    handler: dist/src/handler/StudentHandler.studentInsert
+    events:
+      - http:
+          path: insertStudent
+          method: post
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  snsCreateTopic:
+    handler: dist/src/handler/snsHandler.snsCreateTopic
+    events:
+      - http:
+          path: snsCreateTopic
+          method: post
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  snsListTopic:
+    handler: dist/src/handler/snsHandler.snsListTopic
+    events:
+      - http:
+          path: snsListTopic
+          method: get
+          cors: true     
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
+  snsDeleteTopic:
+    handler: dist/src/handler/snsHandler.snsDeleteTopic
+    events:
+      - http:
+          path: snsDeleteTopic
+          method: post
+          cors: true
+          authorizer:
+            name: authorizationFunc
+            type: TOKEN
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0             
+  snsListSubscription:
+    handler: dist/src/handler/snsHandler.snsListSubscription
+    events:
+      - http:
+          path: snsListSubscription
+          method: get
+          cors: true    
+  snsAddSubscription:
+    handler: dist/src/handler/snsHandler.snsAddSubscription
+    events:
+      - http:
+          path: snsAddSubscription
+          method: post
+          cors: true  
+  snsDeleteSubscription:
+    handler: dist/src/handler/snsHandler.snsDeleteSubscription
+    events:
+      - http:
+          path: snsDeleteSubscription
+          method: delete
+          cors: true    
+  snsSendMessage:
+    handler: dist/src/handler/snsHandler.snsSendMessage
+    events:
+      - http:
+          path: snsSendMessage
+          method: post
+          cors: true       
+  sqsCreateQueue:
+    handler: dist/src/handler/sqsHandler.sqsCreateQueue
+    events:
+      - http:
+          path: sqsCreateQueue
+          method: post
+          cors: true  
+  sqsListQueue:
+    handler: dist/src/handler/sqsHandler.sqsListQueue
+    events:
+      - http:
+          path: sqsListQueue
+          method: get
+          cors: true  
+  sqsDeleteQueue:
+    handler: dist/src/handler/sqsHandler.sqsDeleteQueue
+    events:
+      - http:
+          path: sqsDeleteQueue
+          method: delete
+          cors: true    
+  sqsHandleMessage:
+    handler: dist/src/handler/sqsHandler.sqsHandleMessage
+    events:
+      - http:
+          path: sqsHandleMessage
+          method: post
+          cors: true  
+  sendKafka:
+    handler: dist/src/handler/kafkaHandler.sendKafka
+    events:
+      - http:
+          path: sendKafka
+          method: post
+          cors: true   
+  receiveKafka:
+    handler: dist/src/handler/kafkaHandler.receiveKafka
+    events:
+      - http:
+          path: receiveKafka
+          method: post
+          cors: true                                                                         
+
+package:
+  exclude:
+    - venv/**
+
+plugins:
+  - serverless-offline

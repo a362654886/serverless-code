@@ -1,0 +1,800 @@
+swagger: '2.0'
+info:
+  version: '2021-01-12T09:08:27Z'
+  title: aws-serverless-code-dev
+host: wu4z72qhxc.execute-api.us-east-1.amazonaws.com
+basePath: /dev
+schemes:
+  - https
+securityDefinitions:
+  authorizationToken:
+    type: apiKey
+    name: Authorization
+    in: header  
+    x-amazon-apigateway-authtype: custom
+paths:
+  /userAuth:
+    post:
+      summary: login authorization
+      description: input userEmail and userPassword, then return User body and Token
+      parameters:
+        - name: authBody
+          in: body
+          schema:
+            properties:
+              userEmail:
+                type: string
+              userPassword:
+                type: string
+      responses: 
+        200:
+          description: success
+          schema:
+            items:
+              properties:
+                User:
+                  type: object
+                Token:
+                  type: string
+        400:
+          description: fail
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /userInsert:
+    post:
+      security:
+        - authorizationToken: []
+      summary: insert user
+      description: insert user body to databse
+      parameters:
+        - name: userBody
+          in: body
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/user"
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /userDelete:
+    delete:
+      security:
+        - authorizationToken: []
+      summary: delete user
+      description: delete user body to databse
+      parameters:
+        - name: userBody
+          in: body
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/user"
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string    
+  /userUpdate:
+    put:
+      security:
+        - authorizationToken: []
+      summary: update user
+      description: update user body to databse
+      parameters:
+        - name: userBody
+          in: body
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/user"
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string            
+  /userNameQuery:
+    get:
+      security:
+        - authorizationToken: []
+      summary: get users according userName
+      description: get users according userName
+      parameters:
+        - name: name
+          in: query
+          type: string
+      responses: 
+        200:
+          description: a list of user
+          schema:
+            type: array
+            items:
+              properties:
+                userEmail:
+                  type: string
+                userPassword:
+                  type: string
+                userName:
+                  type: string
+                userRole:
+                  type: string  
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string        
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /userRoleQuery:
+    get:
+      security:
+        - authorizationToken: []
+      summary: get users according userName
+      description: get users according userName
+      parameters:
+        - name: role
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: string
+        - name: pageSize
+          in: query
+          type: string  
+      responses: 
+        200:
+          description: a list of user
+          schema:
+            type: array
+            items:
+              properties:
+                userEmail:
+                  type: string
+                userPassword:
+                  type: string
+                userName:
+                  type: string
+                userRole:
+                  type: string  
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /classDelete:
+    delete:
+      security:
+        - authorizationToken: []
+      summary: delete class
+      description: delete class body to databse
+      parameters:
+        - name: userBody
+          in: body
+          schema:
+            properties:
+              courseId:
+                type: string
+              studentId:
+                type: string
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /classInsert:
+    post:
+      security:
+        - authorizationToken: []
+      summary: insert student to a course
+      description: insert a student to a course
+      parameters:
+        - name: class body
+          in: body
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/class"
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /courseDelete:
+    delete:
+      security:
+        - authorizationToken: []
+      summary: delete course
+      description: delete course body to databse
+      parameters:
+        - name: courseBody
+          in: body
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/course"
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /courseGet:
+    get:
+      security:
+        - authorizationToken: []
+      summary: get all courses
+      description: get all courses
+      responses: 
+        200:
+          description: a list of courses
+          schema:
+            type: array
+            items:
+              properties:
+                _id:
+                  type: string
+                courseName:
+                  type: string
+                information:
+                  type: string
+                students:
+                  type: object  
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string 
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /courseGetOne:
+    get:
+      security:
+        - authorizationToken: []
+      summary: get a course according courseName including students
+      description: get a course according courseName including students
+      parameters:
+        - name: courseName
+          in: query
+          type: string
+      responses: 
+        200:
+          description: a  course
+          schema:
+            items:
+              properties:
+                _id:
+                  type: string
+                courseName:
+                  type: string
+                information:
+                  type: string
+                students:
+                  type: object
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /courseInsert:
+    post:
+      security:
+        - authorizationToken: []
+      summary: insert course
+      description: insert course
+      parameters:
+        - name: courseBody
+          in: body
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/course"
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /courseUpdate:
+    put:
+      security:
+        - authorizationToken: []
+      summary: update course
+      description: update course
+      parameters:
+        - name: courseBody
+          in: body
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/course"
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /deleteStudent:
+    delete:
+      security:
+        - authorizationToken: []
+      summary: delete student
+      description: delete student
+      parameters:
+        - name: studentBody
+          in: body
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/student"
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /insertStudent:
+    post:
+      security:
+        - authorizationToken: []
+      summary: insert student
+      description: insert student
+      parameters:
+        - name: studentBody
+          in: body
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/student"
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /studentQuery:
+    get:
+      security:
+        - authorizationToken: []
+      summary: get students
+      description: get students
+      parameters:
+        - name: page
+          in: query
+          type: string
+        - name: pageSize
+          in: query
+          type: string  
+      responses: 
+        200:
+          description: a list of student
+          schema:
+            type: array
+            items:
+              properties:
+                _id:
+                  type: string
+                studentName:
+                  type: string
+                gender:
+                  type: string
+                phone:
+                  type: string  
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+  /updateStudent:
+    put:
+      security:
+        - authorizationToken: []
+      summary: update student
+      description: update student
+      parameters:
+        - name: userBody
+          in: body
+          schema:
+            properties:
+              user:
+                $ref: "#/definitions/student"
+      responses: 
+        200:
+          description: success
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+        400:
+          description: fail
+          schema: 
+            items:
+              properties:
+                result: 
+                  type: string
+    options:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+    
+    
+definitions:   
+  user:
+    properties:
+      userEmail:
+        type: string
+      userPassword:
+        type: string
+      userName:
+        type: string
+      userRole:
+        type: string
+  class:
+    properties:
+      _id:
+        type: string
+      courseId:
+        type: string  
+      studentId:
+        type: string
+      stuendName:
+        type: string
+  course:
+    properties:
+      courseName:
+        type: string
+      information:
+        type: string  
+  student:
+    properties:
+      _id:
+        type: string
+      studentName:
+        type: string    
+      gender:
+        type: string  
+      phone:
+        type: string
