@@ -2,9 +2,9 @@
  a project aim to study serverless , aws, graphql and dynamoDB.
  This project already deploied. You can check this website.
  
- **URL:**
+ All functions are deployed on the aws server in the form of serverless
  
-All functions are deployed on the aws server in the form of serverless
+ **URL:**
  
  https://lei-swagger-bucket.s3.amazonaws.com/index.html
 
